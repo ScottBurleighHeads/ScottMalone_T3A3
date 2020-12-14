@@ -1,9 +1,15 @@
-import psycopg2
+# Implement an ORM with pyth and flask.
+from dotenv import load_dotenv
+load_dotenv()
 
-connect = psycopg2.connect (dbname= 't3a3', user= 'scott', password= 'easypassword', host= 'localhost')
+import database                                 
 
-cursor = connect.cursor()
-cursor.execute("CREATE TABLE student(id SERIAL PRIMARY KEY,name VARCHAR);")
-connect.commit()
-cursor.close()
-connect.close()
+from flask import Flask
+app = Flask(__name__)
+
+from controllers import registerable_controllers
+for controller in registerable_controllers:
+    app.register_blueprint(controller)               # Registers the endpoints on the blueprint from endpoints.py
+
+
+
