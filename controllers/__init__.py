@@ -1,5 +1,5 @@
-from controllers.endpoints_controller import endpoint
+from controllers.User_controller import user
 
 registerable_controllers = [
-    endpoint
+    user
     ]
