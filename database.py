@@ -1,14 +1,12 @@
-import psycopg2
+from flask_sqlalchemy import SQLAlchemy
 import os
-connect = psycopg2.connect (
-    dbname= 't3a3', 
-    user= 'scott', 
-    password= os.getenv("DB_PASSWORD"), 
-    host= 'localhost')  # Needed to create role first when creating database.
 
-cursor = connect.cursor()
-cursor.execute("SELECT * FROM student;")
-cursor.fetchall()
-connect.commit()
-cursor.close()
-connect.close()
+db = None
+
+def init_db(app):                #It need the main app instance so we need to pass it in, in the main.
+    app.config["SQLALCHEMY_DATABASE_URI"] = f"postgresql+psycopg2://scott:{os.getenv('DB_PASSWORD')}@localhost:5432/t3a3"
+    app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+    db = SQLAlchemy(app)        # Magic cool connection of the database
+    return db
+
+
