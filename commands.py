@@ -16,6 +16,7 @@ def drop_db():
 @db_commands.cli.command("seed")
 def seed_db():
     from models.User_table import User
+    from models.Artist_table import Artist
     from faker import Faker
     import random
 
@@ -35,6 +36,14 @@ def seed_db():
         user.Postcode = random.randint(1000+i,3000)
         db.session.add(user)
         db.session.commit()
+
+        artist = Artist()
+        artist.Artist_name = fake.name()
+        artist.Country = fake.country()
+        artist.Gross_worth = random.randint(50000,50000000)
+        db.session.add(artist)
+        db.session.commit()
+    
     print("Table seeded")
 
 
