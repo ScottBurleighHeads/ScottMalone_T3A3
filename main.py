@@ -18,6 +18,11 @@ from controllers import registerable_controllers
 for controller in registerable_controllers:
     app.register_blueprint(controller)               # Registers the endpoints on the blueprint from endpoints.py
 
+from commands import db_commands
+app.register_blueprint(db_commands)
+
+
+
 
 
 
