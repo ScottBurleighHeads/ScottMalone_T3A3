@@ -7,3 +7,8 @@ artist = Blueprint("artist",__name__,url_prefix="/artist")
 @artist.route("/")
 def hello():
     return "Hello world"
+
+# Finds the artist that made the most money tak
+@artist.route("/")
+def max_profit():
+    return
