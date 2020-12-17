@@ -17,6 +17,7 @@ def drop_db():
 def seed_db():
     from models.User_table import User
     from models.Artist_table import Artist
+    from models.Tracks_table import Tracks
     from faker import Faker
     import random
 
@@ -43,8 +44,18 @@ def seed_db():
         artist.Gross_worth = random.randint(50000,50000000)
         db.session.add(artist)
         db.session.commit()
-    
-    print("Table seeded")
+
+        track = Tracks()
+        track.tracks_name = fake.first_name()
+        track.date_released = fake.date()
+        track.genre = fake.first_name()
+        track.Artist_id = random.randint(0,3)
+        db.session.add(track)
+        db.session.commit()
+
+    print("Tables seeded")
+
+
 
 
 
