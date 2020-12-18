@@ -18,6 +18,7 @@ def seed_db():
     from models.User_table import User
     from models.Artist_table import Artist
     from models.Tracks_table import Tracks
+    from models.Albums_table import Album
     from faker import Faker
     import random
 
@@ -44,7 +45,16 @@ def seed_db():
         artist.gross_worth = random.randint(50000,50000000)
         db.session.add(artist)
         db.session.commit()
-    
+
+    for i in range(5):
+        
+        album = Album()
+        album.album_name = fake.first_name()
+        album.date_released = fake.date()
+        album.Artist_id = random.randint(1,4)
+        db.session.add(album)
+        db.session.commit()
+
     for i in range(5):
         
         track = Tracks()
@@ -52,6 +62,7 @@ def seed_db():
         track.date_released = fake.date()
         track.genre = fake.first_name()
         track.Artist_id = random.randint(1,4)
+        track.album_id = random.randint(1,4)
         db.session.add(track)
         db.session.commit()
 

@@ -1,4 +1,5 @@
 from models.Artist_table import Artist
+from models.Albums_table import Album
 from main import db
 
 
@@ -10,5 +11,6 @@ class Tracks(db.Model):
     date_released = db.Column(db.DateTime)
     genre = db.Column(db.String(50))
     Artist_id = db.Column(db.Integer, db.ForeignKey(Artist.Artist_id),nullable=False)
+    album_id = db.Column(db.Integer, db.ForeignKey(Artist.Artist_id),nullable=False)
 
     
