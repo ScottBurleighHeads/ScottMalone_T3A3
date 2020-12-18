@@ -41,7 +41,7 @@ def seed_db():
         artist = Artist()
         artist.Artist_name = fake.name()
         artist.Country = fake.country()
-        artist.Gross_worth = random.randint(50000,50000000)
+        artist.gross_worth = random.randint(50000,50000000)
         db.session.add(artist)
         db.session.commit()
     
