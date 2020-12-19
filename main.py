@@ -2,7 +2,8 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # Flask application creation
-from flask import Flask
+from flask import Flask, jsonify
+from marshmallow.exceptions import ValidationError
 app = Flask(__name__)
 app.config.from_object("default_settings.app_config")
 
@@ -22,7 +23,9 @@ for controller in registerable_controllers:
 from commands import db_commands
 app.register_blueprint(db_commands)
 
-
+@app.errorhandler(ValidationError)
+def handle_bad_request(error):
+    return (jsonify(error.messages),400)
 
 
 

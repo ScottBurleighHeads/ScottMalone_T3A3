@@ -12,7 +12,7 @@ artist = Blueprint("artist",__name__,url_prefix="/artist")
 def hello():
     return "Hello artist"
 
-# Finds the artist that made the most money using the MAX sequel query and displays in a dictionary. Requirement ()
+# Finds the artist that made the most money using the MAX sequel query and displays in a dictionary. Requirement (R7)
 @artist.route("/Highest_profit")
 def max_profit():
     
@@ -21,9 +21,8 @@ def max_profit():
     max_pay = {"Highest paid amount":f"${max_pay}", "name":artist_name.Artist_name}  # Selected artist name that earned the most profit.
     return max_pay
 
-# Finds the artist that made the least money using the MAX sequel query and displays in a dictionary.
-@artist.route("/Lowest_profit")
-
+# Finds the artist that made the least money using the MAX sequel query and displays in a dictionary. Requirement (R7)
+@artist.route("/Lowest_profit",methods=["GET"])
 def min_profit():
     
     min_pay = db.session.query(func.min(Artist.gross_worth)).scalar()
@@ -32,15 +31,15 @@ def min_profit():
     
     return min_pay
 
-# Calculates the average profit of all artists fullfilling the average requirement. 
-@artist.route("/Average_profit")
+# Calculates the average profit of all artists fullfilling the average requirement. Requirement (R7)
+@artist.route("/Average_profit",methods=["GET"])
 def Average_profit():
 
     average_pay_query = int(db.session.query(func.avg(Artist.gross_worth)).scalar())
     average_pay = {"Average gross payment": f"${average_pay_query}"}
     return average_pay
-# Calculates the sum of profit from all artist 
-@artist.route("/Sum_profit")
+# Calculates the sum of profit from all artist Requirement (R7)
+@artist.route("/Sum_profit",methods=["GET"])
 def Sum_profit():
 
     sum_pay_query = int(db.session.query(func.sum(Artist.gross_worth)).scalar())
@@ -48,14 +47,14 @@ def Sum_profit():
     return sum_pay
 
 # (2/3) R10) Filtering requirements. Prints the table contents into an API by the order from  largest gross_worth to smallest using gross_worth table.
-@artist.route("/Ordering") 
+@artist.route("/Ordering",methods=["GET"]) 
 def Order_by_profit():
 
     ordering =  Artist.query.order_by(Artist.gross_worth.desc()).all()
     return jsonify(artists_schema.dump(ordering))
 
-# (3/3) R10) Prints the table contents into an API where any artist that earns $40 000 000 will be displayed.
-@artist.route("/filtering")
+# (3/3) R10) Prints the table contents into an API where any artist that earns less then $40 000 000 will be displayed.
+@artist.route("/filtering",methods=["GET"])
 def Filter_by_profit():
 
     filtering = Artist.query.filter((Artist.gross_worth < 40000000)).all()

@@ -4,6 +4,8 @@ from models.User_table import User
 from schemas.User_Schema import user_schema, users_schema
 user = Blueprint("user",__name__,url_prefix="/user")
 
+# Evidence of building a full crud resource. Point out looking at the methods will determine type of request
+
 @user.route("/",methods = ["GET"])
 def all_information():
 
@@ -11,14 +13,14 @@ def all_information():
     return jsonify(users_schema.dump(users))
 
 @user.route("/<int:id>",methods=["GET"])
-def user_find(id):
+def find_user(id):
     
     user = User.query.get(id)
     return jsonify(user_schema.dump(user))
      
 
 @user.route("/create",methods = ["POST"])
-def user_details():
+def Create_new_user():
     
     user_fields = user_schema.load(request.json)
 
@@ -39,7 +41,7 @@ def user_details():
     return jsonify(user_schema.dump(new_user))
 
 @user.route("/update/<int:id>", methods=["PUT","PATCH"])
-def user_update(id):
+def update_user(id):
     user_fields = user_schema.load(request.json)
     user = User.query.filter_by(id=id)
     user.update(user_fields)
@@ -48,7 +50,7 @@ def user_update(id):
     return jsonify(user_schema.dump(user))
 
 @user.route("/delete/<int:id>", methods=["DELETE"])
-def user_delete(id):
+def delete_user(id):
     
     user = User.query.filter_by(id=id).first()
     db.session.delete(user)
