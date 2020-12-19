@@ -7,13 +7,8 @@ from schemas.Artist_Schema import artist_schema, artists_schema
 artist = Blueprint("artist",__name__,url_prefix="/artist")
 
 # The endpoints below will meet the requiements of R7(MIN,MAX,AVERAGE,SUM) and R10(Three queries filtering,ordering and selecting)
-
-@artist.route("/")
-def hello():
-    return "Hello artist"
-
 # Finds the artist that made the most money using the MAX sequel query and displays in a dictionary. Requirement (R7)
-@artist.route("/Highest_profit")
+@artist.route("/Highest_profit",methods=["GET"])
 def max_profit():
     
     max_pay = db.session.query(func.max(Artist.gross_worth)).scalar()
@@ -46,7 +41,7 @@ def Sum_profit():
     sum_pay = {"Sum of all artists": f"${sum_pay_query}"}
     return sum_pay
 
-# (2/3) R10) Filtering requirements. Prints the table contents into an API by the order from  largest gross_worth to smallest using gross_worth table.
+# (2/3) R10) Filtering requirements. Prints the table contents into an API by the order from  largest gross_worth to smallest gross_worth using the table.
 @artist.route("/Ordering",methods=["GET"]) 
 def Order_by_profit():
 

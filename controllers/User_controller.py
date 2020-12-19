@@ -42,12 +42,13 @@ def Create_new_user():
 
 @user.route("/update/<int:id>", methods=["PUT","PATCH"])
 def update_user(id):
+    
     user_fields = user_schema.load(request.json)
     user = User.query.filter_by(id=id)
     user.update(user_fields)
     db.session.commit()
-    
-    return jsonify(user_schema.dump(user))
+
+    return jsonify(user_schema.dump(user.first()))
 
 @user.route("/delete/<int:id>", methods=["DELETE"])
 def delete_user(id):
