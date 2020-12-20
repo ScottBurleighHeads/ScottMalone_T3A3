@@ -8,7 +8,7 @@ class AlbumsSchema(ma.SQLAlchemyAutoSchema):
         model = Album
     
     album_name = ma.String(required=False, validate=Length(min=1,max=100))
-    date_released = ma.DateTime(required=True)
+    date_released = ma.DateTime(required=False)
 
 album_schema = AlbumsSchema()
 albums_schema = AlbumsSchema(many=True)
