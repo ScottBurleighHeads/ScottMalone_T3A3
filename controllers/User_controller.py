@@ -1,5 +1,5 @@
 from main import db
-from flask import Blueprint, jsonify, request
+from flask import Blueprint, jsonify, request, abort
 from models.User_table import User
 from schemas.User_Schema import user_schema, users_schema
 user = Blueprint("user",__name__,url_prefix="/user")
@@ -23,6 +23,12 @@ def find_user(id):
 def Create_new_user():
     
     user_fields = user_schema.load(request.json)
+    print(user_fields["email"])
+    
+    user = User.query.filter_by(email=user_fields["email"]).first()
+    
+    if user:
+        return abort(400, description="Email already registered")
 
     new_user = User()
     new_user.email = user_fields["email"]
