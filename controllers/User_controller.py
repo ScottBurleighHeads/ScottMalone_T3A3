@@ -7,6 +7,10 @@ user = Blueprint("user",__name__,url_prefix="/user")
 
 # Evidence of building a full crud resource. Point out looking at the methods will determine type of request
 
+@user.route("/login",methods= ["POST"])
+def auth_login():
+    pass
+
 @user.route("/",methods = ["GET"])
 def all_information():
 
