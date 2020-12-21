@@ -11,7 +11,7 @@ class UserSchema(ma.SQLAlchemyAutoSchema):
     email = ma.Email(required=True)
     first_name = ma.String(required=True, validate=Length(1,50))
     Surname = ma.String(required=True, validate=Length(1,50))
-    Password = ma.String(required=True, validate=Length(1,50))
+    Password = ma.String(required=True, validate=Length(1,200))
     Age = ma.Integer(required=True, validate=Range(0,150))
     Address = ma.String(required=True, validate=Length(1,100))
     City = ma.String(required=True, validate=Length(1,50))

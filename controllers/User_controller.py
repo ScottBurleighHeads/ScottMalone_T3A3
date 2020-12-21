@@ -1,7 +1,8 @@
-from main import db
-from flask import Blueprint, jsonify, request, abort
 from models.User_table import User
 from schemas.User_Schema import user_schema, users_schema
+from main import db
+from main import bcrypt
+from flask import Blueprint, jsonify, request, abort
 user = Blueprint("user",__name__,url_prefix="/user")
 
 # Evidence of building a full crud resource. Point out looking at the methods will determine type of request
@@ -34,7 +35,7 @@ def Create_new_user():
     new_user.email = user_fields["email"]
     new_user.first_name = user_fields["first_name"]
     new_user.Surname = user_fields["Surname"]
-    new_user.Password = user_fields["Password"]
+    new_user.Password =  bcrypt.generate_password_hash(user_fields["Password"]).decode("utf-8")
     new_user.Age = user_fields["Age"]
     new_user.Address = user_fields["Address"]
     new_user.City = user_fields["City"]
