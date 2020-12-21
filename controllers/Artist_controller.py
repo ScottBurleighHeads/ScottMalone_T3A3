@@ -1,14 +1,15 @@
 from main import db
-from flask import Blueprint, jsonify, request
 from models.Artist_table import Artist
 from sqlalchemy import text,func
 from schemas.Artist_Schema import artist_schema, artists_schema
-
+from flask import Blueprint, jsonify, request
+from flask_jwt_extended import jwt_required
 artist = Blueprint("artist",__name__,url_prefix="/artist")
 
 # The endpoints below will meet the requiements of R7(MIN,MAX,AVERAGE,SUM) and R10(Three queries filtering,ordering and selecting)
 # Finds the artist that made the most money using the MAX sequel query and displays in a dictionary. Requirement (R7)
 @artist.route("/Highest_profit",methods=["GET"])
+@jwt_required
 def max_profit():
     
     max_pay = db.session.query(func.max(Artist.gross_worth)).scalar()

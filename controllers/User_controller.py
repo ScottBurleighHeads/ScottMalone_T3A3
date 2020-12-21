@@ -2,6 +2,8 @@ from models.User_table import User
 from schemas.User_Schema import user_schema, users_schema
 from main import db
 from main import bcrypt
+from flask_jwt_extended import create_access_token
+from datetime import timedelta                       # Used for JWT. Develops a token that last to the timelimit.
 from flask import Blueprint, jsonify, request, abort
 user = Blueprint("user",__name__,url_prefix="/user")
 
@@ -16,8 +18,11 @@ def auth_login():
 
     if not user or not bcrypt.check_password_hash(user.Password, user_fields["Password"]):
         return abort(401, description="Incorrect username and password")
-    
-    return "token"
+
+    expiry = timedelta(days=1) # Expires after one day
+    access_token = create_access_token(identity=str(user.id), expires_delta=expiry)
+
+    return jsonify({"token": access_token})
 
 @user.route("/",methods = ["GET"])
 def all_information():
