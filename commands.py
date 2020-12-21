@@ -19,6 +19,7 @@ def seed_db():
     from models.Artist_table import Artist
     from models.Tracks_table import Tracks
     from models.Albums_table import Album
+    from main import bcrypt
     from faker import Faker
     import random
 
@@ -29,7 +30,7 @@ def seed_db():
         user.email = fake.email()
         user.first_name = fake.first_name()
         user.Surname = fake.first_name()
-        user.Password = fake.password()
+        user.Password = bcrypt.generate_password_hash(fake.password(),8)
         user.Age = random.randint(18,60)
         user.Address = fake.address()
         user.City = fake.city()
