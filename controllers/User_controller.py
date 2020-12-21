@@ -12,9 +12,9 @@ def auth_login():
     
     user_fields = user_schema.load(request.json)
 
-    user = User.query.filter_by(email=user_fields["email"].first())
+    user = User.query.filter_by(email=user_fields["email"]).first()
 
-    if not user or not bcrypt.check_password_hash(user.password, user_fields["password"]):
+    if not user or not bcrypt.check_password_hash(user.Password, user_fields["Password"]):
         return abort(401, description="Incorrect username and password")
     
     return "token"
