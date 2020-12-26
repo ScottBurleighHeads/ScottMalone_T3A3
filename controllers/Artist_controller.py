@@ -56,3 +56,23 @@ def Filter_by_profit():
 
     filtering = Artist.query.filter((Artist.gross_worth < 40000000)).all()
     return jsonify(artists_schema.dump(filtering))
+
+# One to many example of Artist to Albums. Artist is the parent and I was able 
+# to find the albums that the artists has create through the relationship 
+@artist.route("/<int:id>/Albums",methods=["GET"])
+def All_albums(id):
+    artist = Artist.query.filter_by(Artist_id=id).first()
+    album_list = []
+    for item in artist.albums:
+        album_list.append(item.album_name)
+    artist_albums = {"Album names": album_list}
+    return artist_albums
+
+@artist.route("/<int:id>/Tracks",methods=["GET"])
+def All_tracks(id):
+    artist = Artist.query.filter_by(Artist_id=id).first()
+    tracks_list = []
+    for item in artist.tracks:
+        tracks_list.append(item.tracks_name)
+    artist_tracks = {"Tracks names": tracks_list}
+    return artist_tracks
