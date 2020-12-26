@@ -13,13 +13,12 @@ def drop_db():
     db.drop_all()
     print("Tables dropped")
 
-# @db_commands.cli.command("seed")
+@db_commands.cli.command("seed")
 def seed_db():
     from models.User_table import User
     from models.Artist_table import Artist
     from models.Tracks_table import Tracks
     from models.Albums_table import Album
-    from models.Playlist_table import Playlist
     from main import bcrypt
     from faker import Faker
     import random
@@ -68,13 +67,13 @@ def seed_db():
         db.session.add(track)
         db.session.commit()
     
-    for i in range(5):
+    # for i in range(5):
         
-        play = Playlist()
-        play.tracks_id = random.randint(1,5)
-        play.user_id = random.randint(1,5)
-        db.session.add(play)
-        db.session.commit()
+    #     play = playlist()
+    #     play.tracks_id = random.randint(1,5)
+    #     play.user_id = random.randint(1,5)
+    #     db.session.add(play)
+    #     db.session.commit()
 
     print("Tables seeded")
 
@@ -84,7 +83,7 @@ def reset_db():
     db.drop_all()
     db.create_all()
     print("Tables created")
-    seed_db()
+
     
     
 

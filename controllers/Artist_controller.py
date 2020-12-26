@@ -65,6 +65,8 @@ def All_albums(id):
     album_list = []
     for item in artist.albums:
         album_list.append(item.album_name)
+    if not album_list:
+        return f"<h1>Unfortunately {artist.Artist_name} has not deposited any albums yet.</h1>"
     artist_albums = {"Album names": album_list}
     return artist_albums
 
@@ -74,5 +76,7 @@ def All_tracks(id):
     tracks_list = []
     for item in artist.tracks:
         tracks_list.append(item.tracks_name)
+    if not tracks_list:
+        return f"<h1>Unfortunately {artist.Artist_name} has not deposited any tracks yet.</h1>"
     artist_tracks = {"Tracks names": tracks_list}
     return artist_tracks

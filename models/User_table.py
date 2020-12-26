@@ -1,4 +1,6 @@
 from main import db 
+from models.Tracks_table import Tracks
+from models.Playlist_table import playlist
 
 class User(db.Model):
     __tablename__ = "user"
@@ -14,3 +16,4 @@ class User(db.Model):
     State = db.Column(db.String(50))
     Country = db.Column(db.String(50))
     Postcode = db.Column(db.Integer)
+    subscriptions = db.relationship(Tracks,secondary= playlist,backref=db.backref('subscribers',lazy='dynamic'))
