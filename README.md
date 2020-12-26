@@ -17,4 +17,9 @@ information in your token. JWT are just encoded and can be decoded. JWT token is
 - payload 
 - Signature JWT_SECRET_KEY
 
-The signature cannot be change. Otherwise it will be invalidated. The hacker cannot generate the same hash if the secret is different.
+The signature cannot be change. Otherwise it will be invalidated. The hacker cannot generate the same hash if the secret is different. Thats the end of validation. Remember Authentification is about proving who you are.
+
+Lets look into Authorisation:
+
+Authorisation is different to authentification. Once you have proven who you are through authentification you will then need certain authorization to view or maked changes on the application. Authorisation is to associate 
+

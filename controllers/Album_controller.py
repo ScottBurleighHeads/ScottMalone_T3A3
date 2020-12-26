@@ -22,3 +22,4 @@ def update_album(id):
     album.update(album_fields)
     db.session.commit()
     return jsonify(album_schema.dump(album.first()))
+
