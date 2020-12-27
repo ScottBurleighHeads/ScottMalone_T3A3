@@ -10,6 +10,7 @@ def create_db():
 
 @db_commands.cli.command("drop")
 def drop_db():
+    
     db.drop_all()
     print("Tables dropped")
 
@@ -19,13 +20,14 @@ def seed_db():
     from models.Artist_table import Artist
     from models.Tracks_table import Tracks
     from models.Albums_table import Album
+    # from models.Playlist_table import playlist
     from main import bcrypt
     from faker import Faker
     import random
 
     fake = Faker()
-    
-    for i in range(5):
+    length = 10
+    for i in range(length):
         user = User()
         user.email = fake.email()
         user.first_name = fake.first_name()
@@ -47,34 +49,33 @@ def seed_db():
         db.session.add(artist)
         db.session.commit()
 
-    for i in range(5):
+    for i in range(length):
         
         album = Album()
         album.album_name = fake.first_name()
         album.date_released = fake.date()
-        album.Artist_id = random.randint(1,4)
+        album.Artist_id = random.randint(1,length)
         db.session.add(album)
         db.session.commit()
 
-    for i in range(5):
+    for i in range(length):
         
         track = Tracks()
         track.tracks_name = fake.first_name()
         track.date_released = fake.date()
         track.genre = fake.first_name()
-        track.Artist_id = random.randint(1,4)
-        track.album_id = random.randint(1,4)
+        track.Artist_id = random.randint(1,length)
+        track.album_id = random.randint(1,length)
         db.session.add(track)
         db.session.commit()
     
-    # for i in range(5):
+    for i in range(length):
         
-    #     play = playlist()
-    #     play.tracks_id = random.randint(1,5)
-    #     play.user_id = random.randint(1,5)
-    #     db.session.add(play)
-    #     db.session.commit()
-
+        track1 = Tracks.query.filter_by(tracks_id=random.randint(1,length)).first()
+        user1 = User.query.filter_by(id = random.randint(1,length)).first()
+        track1.playlist.append(user1)
+        db.session.commit()
+        
     print("Tables seeded")
 
 

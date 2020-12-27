@@ -82,3 +82,6 @@ def delete_user(id):
     db.session.commit()
 
     return jsonify(user_schema.dump(user))
+
+# # Get the users playlist
+# @user.route("/playlist/<int:id>",methods=["GET"] )

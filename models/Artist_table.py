@@ -9,8 +9,8 @@ class Artist(db.Model):
     Artist_name = db.Column(db.String(100))
     Country = db.Column(db.String(50))
     gross_worth = db.Column(db.Integer)
-    albums = db.relationship(Album, backref='artist_album')
-    tracks = db.relationship(Tracks, backref='artist_track')
+    albums = db.relationship(Album, backref='artist_album',cascade = "all, delete")
+    tracks = db.relationship(Tracks, backref='artist_track',cascade = "all, delete")
 
   
 
