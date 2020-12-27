@@ -83,5 +83,18 @@ def delete_user(id):
 
     return jsonify(user_schema.dump(user))
 
-# # Get the users playlist
-# @user.route("/playlist/<int:id>",methods=["GET"] )
+# Get the users playlist from a many to many relationship
+@user.route("/playlist/<int:id>",methods=["GET"] )
+def get_playlist(id):
+   
+    user1 = User.query.filter_by(id = id).first()
+    playlist = []
+    try:
+        for tracks in user1.playlist:
+            playlist.append(tracks.tracks_name)
+            user_playlist = {f"{user1.first_name}s playlist":playlist}
+        return user_playlist
+    except: 
+        return f"<h3>ERROR: {user1.first_name} does not have a playlist</h3>"
+
+   
