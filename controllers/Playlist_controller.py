@@ -39,3 +39,7 @@ def add_track():
 
     return {"User": f"{user.first_name} {user.Surname}","New track added":f"{track.tracks_name}","Playlist":f"{get_playlist(user.id)[f'{user.first_name}s playlist']}"}
 
+# @playlist.route("/delete_track<int:id>", method=['DELETE'])
+# @jwt_required
+# def delete_track(id):
+    

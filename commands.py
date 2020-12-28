@@ -75,13 +75,21 @@ def seed_db():
         db.session.add(track)
     db.session.commit()
     
-    for i in range(length*10):
+    for i in range(length*20):
         
-        track1 = Tracks.query.filter_by(tracks_id=random.randint(1,length)).first()
-        user1 = User.query.filter_by(id = random.randint(1,length)).first()
-        track1.playlist.append(user1)
-    db.session.commit()
-        
+        # I have put a unique constraint in the playlist meaning the user cant have the 
+        # same track in the the playlist. 
+
+        try:
+            track1 = Tracks.query.filter_by(tracks_id=random.randint(1,length)).first()
+            user1 = User.query.filter_by(id = random.randint(1,length)).first()
+            track1.playlist.append(user1)
+            db.session.commit()
+        except:
+            pass
+    
+                
+
 @db_commands.cli.command("reset")
 def reset_db():
     db.drop_all()
