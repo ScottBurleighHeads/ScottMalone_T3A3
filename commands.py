@@ -14,13 +14,12 @@ def drop_db():
     db.drop_all()
     print("Tables dropped")
 
-@db_commands.cli.command("seed")
+# @db_commands.cli.command("seed")
 def seed_db():
     from models.User_table import User
     from models.Artist_table import Artist
     from models.Tracks_table import Tracks
     from models.Albums_table import Album
-    # from models.Playlist_table import playlist
     from main import bcrypt
     from faker import Faker
     import random
@@ -29,25 +28,25 @@ def seed_db():
     length = 10
     for i in range(length):
         user = User()
-        user.email = fake.email()
+        user.email = f"test{i}@test.com"
         user.first_name = fake.first_name()
         user.Surname = fake.first_name()
-        user.Password = bcrypt.generate_password_hash(fake.password(),8)
+        user.Password = bcrypt.generate_password_hash("123456").decode("utf-8")
         user.Age = random.randint(18,60)
         user.Address = fake.address()
         user.City = fake.city()
         user.State = fake.state()
         user.Country = fake.country()
-        user.Postcode = random.randint(1000+i,3000)
+        user.Postcode = random.randint(1000,3000)
         db.session.add(user)
-        db.session.commit()
+        
 
         artist = Artist()
         artist.Artist_name = fake.name()
         artist.Country = fake.country()
         artist.gross_worth = random.randint(50000,50000000)
         db.session.add(artist)
-        db.session.commit()
+    db.session.commit()
 
     for i in range(length):
         
@@ -56,7 +55,7 @@ def seed_db():
         album.date_released = fake.date()
         album.Artist_id = random.randint(1,length)
         db.session.add(album)
-        db.session.commit()
+    db.session.commit()
 
     for i in range(length):
         
@@ -67,23 +66,23 @@ def seed_db():
         track.Artist_id = random.randint(1,length)
         track.album_id = random.randint(1,length)
         db.session.add(track)
-        db.session.commit()
+    db.session.commit()
     
-    for i in range(length):
+    for i in range(length*10):
         
         track1 = Tracks.query.filter_by(tracks_id=random.randint(1,length)).first()
         user1 = User.query.filter_by(id = random.randint(1,length)).first()
         track1.playlist.append(user1)
-        db.session.commit()
+    db.session.commit()
         
-    print("Tables seeded")
-
-
 @db_commands.cli.command("reset")
 def reset_db():
     db.drop_all()
+    print("Tables dropped")
     db.create_all()
     print("Tables created")
+    seed_db()
+    print("Tables seeded")
 
     
     

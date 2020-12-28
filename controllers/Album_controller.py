@@ -23,7 +23,7 @@ def update_album(id):
     db.session.commit()
     return jsonify(album_schema.dump(album.first()))
 
-# One to many Album to tracks relationship
+# One to many Album to tracks relationship. Finds all tracks in Albums.
 @album.route("/<int:id>/tracks",methods=["GET"])
 def album_tracks(id):
     album = Album.query.filter_by(album_id=id).first()
