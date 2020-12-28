@@ -20,12 +20,15 @@ def seed_db():
     from models.Artist_table import Artist
     from models.Tracks_table import Tracks
     from models.Albums_table import Album
+    from flask_jwt_extended import create_access_token
+    from datetime import timedelta
     from main import bcrypt
     from faker import Faker
     import random
 
     fake = Faker()
     length = 10
+    expiry = timedelta(days=1)
     for i in range(length):
         user = User()
         user.email = f"test{i}@test.com"
@@ -39,15 +42,19 @@ def seed_db():
         user.Country = fake.country()
         user.Postcode = random.randint(1000,3000)
         db.session.add(user)
-        
-
+        db.session.commit()
+        user.token = create_access_token(identity=str(user.id), expires_delta=expiry)  # JWT Token only for development debugging
+    
+        db.session.add(user)
+        db.session.commit()
+            
         artist = Artist()
         artist.Artist_name = fake.name()
         artist.Country = fake.country()
         artist.gross_worth = random.randint(50000,50000000)
         db.session.add(artist)
     db.session.commit()
-
+    
     for i in range(length):
         
         album = Album()

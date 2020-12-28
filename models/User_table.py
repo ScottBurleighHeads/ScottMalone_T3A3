@@ -16,4 +16,5 @@ class User(db.Model):
     State = db.Column(db.String(50))
     Country = db.Column(db.String(50))
     Postcode = db.Column(db.Integer)
+    token = db.Column(db.String(500))
     playlist = db.relationship(Tracks,secondary=playlist,backref=db.backref('playlist', lazy='dynamic'),cascade="all, delete")
