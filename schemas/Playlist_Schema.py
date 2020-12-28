@@ -1,9 +1,9 @@
 from main import ma
-from models.Playlist import Playlist
+from models.playlist_table import playlist
 
 class PlaylistSchema(ma.SQLAchemyAutoSchema):
     class Meta:
-        model = Playlist
+        model = playlist
 
 playlist_schema = PlaylistSchema()
 playlists_schema = PlaylistSchema(many=True)
