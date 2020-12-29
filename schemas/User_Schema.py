@@ -6,7 +6,6 @@ from marshmallow.validate import Length, Range
 class UserSchema(ma.SQLAlchemyAutoSchema):
     class Meta:
         model = User
-        # load_only = ["Password"] # wont output the password to the api.
     
     # Validation by specifying datatypes.
     email = ma.Email(required=True)

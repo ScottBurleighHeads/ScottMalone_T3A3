@@ -34,7 +34,7 @@ def seed_db():
         user.email = f"test{i}@test.com"
         user.first_name = fake.first_name()
         user.Surname = fake.first_name()
-        user.Password = bcrypt.generate_password_hash("123456").decode("utf-8")
+        user.password = bcrypt.generate_password_hash("123456").decode("utf-8")
         user.Age = random.randint(18,60)
         user.Address = fake.address()
         user.City = fake.city()

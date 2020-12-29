@@ -69,6 +69,9 @@ def All_albums(id):
     artist_albums = {"Album names": album_list}
     return artist_albums
 
+# One to many example of Artist to tracks. Artist is the parent and I was able 
+# to find the tracks that the artists has created through the relationship 
+
 @artist.route("/<int:id>/Tracks",methods=["GET"])
 def All_tracks(id):
     artist = Artist.query.filter_by(Artist_id=id).first()
