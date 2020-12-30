@@ -74,4 +74,123 @@ The privacy act is only for large business's that bring in $3 million or more pe
 OAIC. (2019). Australian Privacy Principles quick reference. [online] Available at: https://www.oaic.gov.au/privacy/australian-privacy-principles/australian-privacy-principles-quick-reference/.
 
 
-‌
+### R4) Uses programming language features or frameworks to implement a data model.
+
+Please take note that a MVC data model was implemented where the model talks to postgresql database, the view renders templates covering the front end of the app and the controller combines and directs the data to where it needs to go. SQLAlchemy was used to communicate with the database. No raw sql was used in the commands to avoid sql injection. The add on feature Marshmallo was used to serialize/deserialize data and to validate data.
+
+Example of marshmallo validating the user data. Also navigate to schemas:
+
+![marshmallo](docs/MarshmalloValidate.JPG)
+
+### R5) Implement code using a Python framework to create, read, update and delete records, and export all data from the database from the database.
+
+Check controllers/User_controller for a full crud resource. Check controllers/Playlist_controller to check that has a create, read and delete feature. Check controllers/Album_controller for create, read and update.
+
+### R6) Uses programming language features or frameworks to display data
+
+Incomplete
+
+### R7) Implements application layer which utilises a database to produce aggregated data relating to business matters
+
+Check controllers/Artist_controller.
+
+Endpoints: 
+
+Start with localhost:5000/artist
+
+|Endpoints| Output |
+|---|---|
+|/Highest_profit| Finds the highest paid artist using the MAX function |
+|/Lowest_profit| Finds the lowest paid artist using the MIN function | 
+|/Average_profit| Finds the average profit of all artists using the average function|
+|/Sum_profit| Adds all the profit of all the artists using the sum function|
+
+### R8) Implements input validation and integrity checks on data to address business risks
+
+Marshmallo handles the serialization and deserialization of the data meaning it is the first feature to work with the input data from the user making it ideal to validate the data input. Developers have considered this already and developed a library of validation tools built into marshmallo which I have used to validate the input. For example I have defined that email = ma.Email(required = True). That means that email needs to be formatted like and email, it also means it does not except null values as given in the insomnia example and the field is required so the user can not leave it blank when submitting that endpoint. Marshmallo even has its own invalid messages seen in the example below.
+
+address: schemas/User_schema
+
+![Validation proof](docs/MarshmalloValidate.JPG) 
+
+Insomnia example:
+
+![Insomnia example](docs/Insomnia.JPG)
+
+### R9) Analyses a problem scenario and creates database tables and fields
+
+##### One to One example:
+
+Look in models/User_table.py and models/Alias_table.py.
+
+I created a one to one table between User_tables and Alias_table purely to meet the requirements of the assessment. I create the link in flask shell in the example below.
+
+![One to one](docs/Alias_database.JPG)
+![One to one](docs/One_to_one_shell.JPG)
+
+##### One to Many example:
+
+Look in models/Artist_table, models/Albums_table, models/Tracks_table
+
+![table evidence](docs/Albums.JPG)
+![table evidence](docs/Tracks.JPG)
+
+I have designed a database of artist, albums and tracks. In my design I have made a One artist to Many albums relationship, a One artist to Many tracks and a One album to Many tracks relationship.
+
+Below is the controller endpoints for models/Artist_controller. In the functions the queries call the artist with the matching id then display all albums or all track relating to that artist.
+
+![table evidence](docs/EndpointManyToOne.JPG)
+
+Results of the controller endpoints displaying all albums related to artist with id=1 and all tracks to artist with id=1. Take note all Output I have just used fake names.
+
+![evidence](docs/ALbumOutput.JPG)
+![evidence](docs/TracksOutput.JPG)
+
+##### Many to Many relationship example: Bonus marks
+
+address: models/playlist
+
+I needed five tables to meet the requirement so I added a playlist table that is the bridge between Users to Tracks. Many Users can have Many tracks.
+Endpoints:
+
+Begin with: 
+
+localhost:5000/playlist
+
+|Endpoints|Purpose|
+|---|---|
+|/id |Get the playlist of a user with correct id|
+|/add_track|Add a track to the users playlist|
+|/delete_track|Delete a track from the users playlist|
+
+![Database playlist table](docs/ManytoMany.JPG)
+
+![PLaylist example](docs/Playlist.JPG)
+
+### R10) Develops complex queries which select, filter, group and order data.
+
+all query's can be found in /controllers/Artist_controller clearly  labelled 1/3, 2/3 or 3/3.
+
+|query|type|
+|---|---|
+|artist_name = Artist.query.filter_by(gross_worth=max_pay).first() | selection filter |
+|ordering =  Artist.query.order_by(Artist.gross_worth.desc()).all()| ordering descending order |
+|filtering = Artist.query.filter((Artist.gross_worth < 40000000)).all()| filtering by gross_worth magnitude|
+
+### R11) Develops complex queries which join tables together.
+
+Below is a picture of raw sql in the postgresql terminal. I joined three tables together. I match the playlist table with the name of the user and the name of the track they displayed.
+
+![raw sql query](docs/postres_raw_sql_join.JPG)
+
+Below is another raw sql query where I joined another three tables together. Currently I have joined up the artist table with the albums table and the tracks table. Both the albums and the tracks belong to the artist. Please take into consideration that I just seeded all the names with first_name.faker().
+
+![raw sql query](docs/post2.JPG)
+
+Below is an example of joining artists and tracks using SQLAlchemy. The formatting is not as nice but it hopefully fulfills any requirements. Completed in the flask shell.
+
+![SQLAlchemy query](docs/SQLA_join.JPG)
+
+### R12) Implements a script to export all data from the database.
+
+Not yet done 

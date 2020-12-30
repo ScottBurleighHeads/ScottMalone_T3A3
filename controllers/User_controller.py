@@ -50,7 +50,7 @@ def Create_new_user():
     new_user.email = user_fields["email"]
     new_user.first_name = user_fields["first_name"]
     new_user.Surname = user_fields["Surname"]
-    new_user.Password =  bcrypt.generate_password_hash(user_fields["Password"]).decode("utf-8")
+    new_user.password =  bcrypt.generate_password_hash(user_fields["password"]).decode("utf-8")
     new_user.Age = user_fields["Age"]
     new_user.Address = user_fields["Address"]
     new_user.City = user_fields["City"]

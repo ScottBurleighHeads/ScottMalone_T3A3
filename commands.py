@@ -49,7 +49,7 @@ def seed_db():
         db.session.commit()
             
         artist = Artist()
-        artist.Artist_name = fake.name()
+        artist.artist_name = fake.name()
         artist.Country = fake.country()
         artist.gross_worth = random.randint(50000,50000000)
         db.session.add(artist)
@@ -60,7 +60,7 @@ def seed_db():
         album = Album()
         album.album_name = fake.first_name()
         album.date_released = fake.date()
-        album.Artist_id = random.randint(1,length)
+        album.artist_id = random.randint(1,length)
         db.session.add(album)
     db.session.commit()
 
@@ -70,7 +70,7 @@ def seed_db():
         track.tracks_name = fake.first_name()
         track.date_released = fake.date()
         track.genre = fake.first_name()
-        track.Artist_id = random.randint(1,length)
+        track.artist_id = random.randint(1,length)
         track.album_id = random.randint(1,length)
         db.session.add(track)
     db.session.commit()

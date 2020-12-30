@@ -79,6 +79,6 @@ def All_tracks(id):
     for item in artist.tracks:
         tracks_list.append(item.tracks_name)
     if not tracks_list:
-        return f"<h1>Unfortunately {artist.Artist_name} has not deposited any tracks yet.</h1>"
+        return f"<h1>Unfortunately {artist.artist_name} has not deposited any tracks yet.</h1>"
     artist_tracks = {"Tracks names": tracks_list}
     return artist_tracks

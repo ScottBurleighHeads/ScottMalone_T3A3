@@ -1,6 +1,7 @@
 from main import db 
 from models.Tracks_table import Tracks
 from models.Playlist_table import playlist
+from models.Alias_table import Alias
 
 class User(db.Model):
     __tablename__ = "user"
@@ -18,3 +19,4 @@ class User(db.Model):
     Postcode = db.Column(db.Integer)
     token = db.Column(db.String(500))
     playlist = db.relationship(Tracks,secondary=playlist,backref=db.backref('playlist', lazy='dynamic'),cascade="all, delete")
+    alias = db.relationship(Alias, backref="user_alias", uselist=False) #uselist=False makes the table one to one.

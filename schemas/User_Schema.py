@@ -7,11 +7,11 @@ class UserSchema(ma.SQLAlchemyAutoSchema):
     class Meta:
         model = User
     
-    # Validation by specifying datatypes.
+    # Validation by specifying datatypes and allocating length.
     email = ma.Email(required=True)
     first_name = ma.String(required=False, validate=Length(1,50))
     Surname = ma.String(required=False, validate=Length(1,50))
-    Password = ma.String(required=True, validate=Length(1,200))
+    password = ma.String(required=True, validate=Length(1,200))
     Age = ma.Integer(required=False, validate=Range(0,150))
     Address = ma.String(required=False, validate=Length(1,100))
     City = ma.String(required=False, validate=Length(1,50))

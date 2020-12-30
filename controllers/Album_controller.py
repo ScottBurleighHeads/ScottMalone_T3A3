@@ -4,10 +4,6 @@ from models.Albums_table import Album
 from schemas.Albums_Schema import album_schema, albums_schema
 album = Blueprint("albums",__name__,url_prefix="/albums")
 
-@album.route("/")
-def hello():
-    return "hello"
-
 @album.route("/<int:id>")
 def find_album(id):
     album = Album.query.get(id)
