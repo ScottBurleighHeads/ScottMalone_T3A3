@@ -6,5 +6,6 @@ tracks = Blueprint("tracks",__name__,url_prefix="/tracks")
 
 
 @tracks.route("/")
-def Hello():
-    return "hello"
+def Get_all_tracks():
+    tracks = Tracks.query.all()
+    return jsonify(tracks_schema.dump(tracks))
