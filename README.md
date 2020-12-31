@@ -98,6 +98,7 @@ If you already have your own SQL application that is fine. Remember to create a 
 |if login fails then |sudo -i -u postgres|
 |then login|psql postgres|
 |create a database t3a3 in the postgres raw sql|CREATE DATABASE t3a3;|
+|Optional load table and fake fake data into the database|psql t3a3 < dump.sql|
 
 ##### Flask commands
 

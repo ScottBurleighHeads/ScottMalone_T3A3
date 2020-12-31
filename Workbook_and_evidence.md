@@ -192,4 +192,7 @@ Below is an example of joining artists and tracks using SQLAlchemy. The formatti
 
 ### R12) Implements a script to export all data from the database.
 
-Not yet done 
+Script: check dump.sql in directory SCOTTMALONE_T3A3 to find the evidence;
+
+pg_dump --no-owner t3a3 > dump.sql           ( Save everything on a database to a sql file for transporting )
+psql {new database} < dump.sql		         ( Load into new database )
