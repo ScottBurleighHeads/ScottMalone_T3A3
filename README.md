@@ -57,11 +57,12 @@ begin with localhost:5000/artist
 ##### Albums:
 
 begin with localhost:5000/albums
+
 |Endpoints|Application|
-|---|---|---|
+|---|---|
 |/id|Get all information in the database related to the album|
 |/update/id|Update the details of the album with the matching id number|
-|/id/tracks|Get all tracks the are on the album|
+|/id/tracks|Get all tracks that are on the album|
 
 ### Installation instructions:
 
