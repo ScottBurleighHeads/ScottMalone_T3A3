@@ -96,7 +96,7 @@ begin with localhost:5000/albums
 |if login fails then |sudo -i -u postgres|
 |then login|psql postgres|
 |create a database t3a3 in the postgres raw sql|CREATE DATABASE t3a3;|
-|Optional load table and fake fake data into the database|psql t3a3 < dump.sql|
+|Optional load table and fake data into the database|psql t3a3 < dump.sql|
 
 If you already have your own SQL application that is fine. Remember to create a database name t3a3 then follow the command in setup environment. You will need to set up the you DB_URI environment variable. Here is example DB_URI=postgresql+psycopg2://{Your admin}:{Your password}@localhost:5432/t3a3.
 
@@ -111,7 +111,7 @@ Flask:
 |start virtual environment|source "venv/bin/activate"|
 |Create the database tables|flask db create|
 |Delete all database tables|flask db drop|
-|To seen the database with fake data|flask db seed|
+|To seed the database with fake data|flask db seed|
 
 # T3A3 - Implement a System with Data and Application Layers.
 
