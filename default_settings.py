@@ -1,6 +1,5 @@
 import os
 
-
 class Config(object):
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     JWT_SECRET_KEY = "duck"
@@ -13,7 +12,6 @@ class Config(object):
             raise ValueError("DB_URI is not set")
 
         return value
-
 
 class DevelopmentConfig(Config):
     DEBUG = True

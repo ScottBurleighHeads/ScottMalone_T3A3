@@ -87,7 +87,12 @@ Check controllers/User_controller for a full crud resource. Check controllers/Pl
 
 ### R6) Uses programming language features or frameworks to display data
 
-Incomplete
+I have designed a template for the playlist display at controllers/Playlist_controllers for the endpoint localhost:5000\playlist\id. Also check templates/layout.html and templates/playlist.html. I am using fake data that inputs first names for the data so try not to get confused.
+
+Evidence:
+
+![template example](docs/images/TemplateExample.JPG)
+
 
 ### R7) Implements application layer which utilises a database to produce aggregated data relating to business matters
 

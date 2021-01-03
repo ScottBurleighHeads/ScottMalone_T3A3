@@ -2,7 +2,7 @@ from models.User_table import User
 from models.Tracks_table import Tracks
 from main import bcrypt
 from main import db
-from flask import Blueprint, request, jsonify, abort
+from flask import Blueprint, request, jsonify, abort, render_template
 from flask_jwt_extended import jwt_required, get_jwt_identity
 from schemas.User_Schema import user_schema, users_schema
 from schemas.Tracks_Schema import track_schema, tracks_schema
@@ -13,14 +13,18 @@ playlist = Blueprint("playlist",__name__,url_prefix="/playlist")
 def get_playlist(id):
    
     user1 = User.query.filter_by(id = id).first()
-    play = []
-    try:
-        for tracks in user1.playlist:
-            play.append(tracks.tracks_name)
-            user_playlist = {f"{user1.first_name}s playlist":play}
-        return user_playlist
-    except: 
-        return f"<h3>ERROR: {user1.first_name} does not have a playlist</h3>"
+    return render_template("playlist.html",user = user1,title = playlist)
+    # play = []
+    # try:
+    #     # for tracks in user1.playlist:
+    #     #     play.append(tracks.tracks_name)
+    #     #     user_playlist = {f"{user1.first_name}s playlist":play}
+    #     # return user_playlist
+
+    # except: 
+    #     return f"<h3>ERROR: {user1.first_name} does not have a playlist</h3>"
+
+
 # Add a track to the users playlist
 @playlist.route("/add_track",methods=["POST"])
 @jwt_required

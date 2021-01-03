@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+
+{% block content %}
+    <h1>{{ user.first_name }} {{user.Surname}}'s playlist</h1>
+    <h3>songs:</h3>
+    {% for tracks in user.playlist %}
+    <div class="card" style="width: 18rem;">
+        <div class="card-body">
+          <h5 class="card-title">{{tracks.tracks_name}}</h5>
+          <h6 class="card-subtitle mb-2 text-muted">Artist: {{tracks.artist_track.artist_name}}</h6>
+          <p class="card-text">Genre: {{tracks.genre}}</p>
+        </div>
+      </div>
+        
+    {% endfor %}
+{% endblock %}
+
