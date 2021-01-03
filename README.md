@@ -89,14 +89,14 @@ begin with localhost:5000/albums
 ##### Set up Postgres server and database
 
 |Instruction|Commands|
-|---|---|---|
+|---|---|
 |Install postgres|sudo apt-get install posgresql-13|
 |start the postgres server|sudo service postgresql start|
 |login|psql postgres|
 |if login fails then |sudo -i -u postgres|
 |then login|psql postgres|
-<!-- |create a database t3a3 in the postgres raw sql|CREATE DATABASE t3a3;|
-|Optional load table and fake fake data into the database|psql t3a3 < dump.sql| -->
+|create a database t3a3 in the postgres raw sql|CREATE DATABASE t3a3;|
+|Optional load table and fake fake data into the database|psql t3a3 < dump.sql|
 
 If you already have your own SQL application that is fine. Remember to create a database name t3a3 then follow the command in setup environment. You will need to set up the you DB_URI environment variable. Here is example DB_URI=postgresql+psycopg2://{Your admin}:{Your password}@localhost:5432/t3a3.
 
@@ -107,7 +107,7 @@ If you already have your own SQL application that is fine. Remember to create a 
 Flask:
 
 |Instruction|Commands|
-|---|---|---|
+|---|---|
 |start virtual environment|source "venv/bin/activate"|
 |Create the database tables|flask db create|
 |Delete all database tables|flask db drop|
