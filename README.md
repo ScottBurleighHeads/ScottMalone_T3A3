@@ -12,8 +12,6 @@ This assessment is a python server-side web application that takes advantage of 
 
 ### Endpoints API:
 
-##### User:
-
 begin with: localhost:5000/user
 
 |Endpoint|Application|
@@ -92,6 +90,8 @@ begin with localhost:5000/albums
 
 If you already have your own SQL application that is fine. Remember to create a database name t3a3 then follow the command in setup environment. You will need to set up the you DB_URI environment variable. Here is example DB_URI=postgresql+psycopg2://{Your admin}:{Your password}@localhost:5432/t3a3.
 
+Postgres:
+
 |Instruction|Commands|
 |---|---|---|
 |Install postgres|sudo apt-get install posgresql-13|
@@ -103,6 +103,8 @@ If you already have your own SQL application that is fine. Remember to create a 
 |Optional load table and fake fake data into the database|psql t3a3 < dump.sql|
 
 ##### Flask commands
+
+Flask:
 
 |Instruction|Commands|
 |---|---|---|
