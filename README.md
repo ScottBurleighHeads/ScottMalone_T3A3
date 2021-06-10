@@ -1,4 +1,4 @@
-# T3A3 - Implement a System with Data and Application Layers.
+##### Implement a System with Data and Application Layers. This project was a third term project at Coder Academy. I designed a similar application to spotify with a relational database that can map songs to albums and artists. I was required to run a Python application using the framework Flask. I also needed an Object relational mapper which I used SQLAlchemy connected to a PostgreSQL database among many other packages. 
 
 ##### Please note that I have Isolated the work and evidence in a seperate file. It has been copied and pasted from the README and is still availble in the README.
 
